@@ -9,7 +9,6 @@ template <typename Async>
 auto wait_for(Async const &async, Windows::Foundation::TimeSpan const &timeout);
 }
 #include <objbase.h>
-#include <winrt/Windows.Foundation.h>
 
 namespace vstwebview {
 
@@ -84,7 +83,9 @@ WebviewWin32::WebviewWin32(HWND parent_window, bool debug,
 void WebviewWin32::Terminate() {}
 
 void WebviewWin32::SetTitle(const std::string &title) {
-  SetWindowTextW(window_, winrt::to_hstring(title).c_str());
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+  std::wstring wide = converter.from_bytes(title);
+  SetWindowTextW(window_, wide.c_str());
 }
 
 void WebviewWin32::SetViewSize(int width, int height, SizeHint hints) {
