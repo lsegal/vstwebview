@@ -31,7 +31,7 @@ endif()
 
 smtg_enable_vst3_sdk()
 
-smtg_add_vst3plugin(panner
+smtg_add_vst3plugin(panner-webview
         include/plugcontroller.h
         include/plugids.h
         include/plugprocessor.h
@@ -41,25 +41,25 @@ smtg_add_vst3plugin(panner
         source/plugprocessor.cpp
         )
 
-smtg_target_add_plugin_resources(panner
+smtg_target_add_plugin_resources(panner-webview
         RESOURCES
         resource/background.png
         resource/index.html
         resource/style.css
         resource/main.js
-        )
+)
 
-smtg_target_add_plugin_snapshots(panner
+smtg_target_add_plugin_snapshots(panner-webview
         RESOURCES
         resource/A2EAF7DB320640F48EDE380DDF89562C_snapshot.png
         resource/A2EAF7DB320640F48EDE380DDF89562C_snapshot_2.0x.png
-        )
+)
 
 
-target_link_libraries(panner
+target_link_libraries(panner-webview
         PRIVATE
         vstwebview
         sdk
         nlohmann_json::nlohmann_json
         ${PLATFORM_LIBRARIES}
-        )
+)

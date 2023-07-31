@@ -95,40 +95,8 @@ void PanParameter::toString (Vst::ParamValue normValue, Vst::String128 string) c
 //------------------------------------------------------------------------
 bool PanParameter::fromString (const Vst::TChar* string, Vst::ParamValue& normValue) const
 {
-	String wrapper ((Vst::TChar*)string); // do not know buffer size here!
-	if (wrapper.findFirst (STR ("C")) >= 0)
-	{
-		normValue = 0.5;
-		return true;
-	}
-	else
-	{
-		bool left = wrapper.findFirst (STR ("L")) == 0;
-		double tmp = 0.0;
-		if (wrapper.scanFloat (tmp))
-		{
-			if (tmp < 0)
-			{
-				left = true;
-				if (tmp < -100)
-					tmp = 100;
-				else
-					tmp = -tmp;
-			}
-			else if (tmp > 100.0)
-			{
-				normValue = 1;
-				return true;
-			}
-			if (!left)
-				normValue = tmp / 200 + 0.5;
-			else
-				normValue = 0.5 - tmp / 200;
-
-			return true;
-		}
-	}
-	return false;
+  normValue = 0.5;
+	return true;
 }
 
 //-----------------------------------------------------------------------------
